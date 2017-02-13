@@ -13,4 +13,6 @@ angular.module('starter').controller('ListagemController', function($scope) {
   'Fusca 1500'];
 
   $scope.endereco = 'Rua Vergueiro, 3185';
+}).controller('CarroEscolhidoController', function ($stateParams, $scope) {
+  $scope.carroEscolhido = $stateParams.carro;
 });
