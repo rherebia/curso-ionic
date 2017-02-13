@@ -9,5 +9,9 @@ angular.module('starter').config(function ($stateProvider, $urlRouterProvider) {
     url: '/carroescolhido/:carro',
     templateUrl: 'templates/carroescolhido.html',
     controller: 'CarroEscolhidoController'
+  }).state('finalizarPedido', {
+    url: '/finalizarpedido/:carro',
+    templateUrl: 'templates/finalizarpedido.html',
+    controller: 'FinalizarPedidoController'
   });
 });

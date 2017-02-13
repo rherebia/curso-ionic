@@ -30,4 +30,15 @@ angular.module('starter').controller('ListagemController', function($scope) {
       $scope.carroEscolhido.preco = $scope.carroEscolhido.preco - acessorio.preco;
     }
   };
+}).controller('FinalizarPedidoController', function($stateParams, $scope, $ionicPopup, $state) {
+  $scope.carroFinalizado = angular.fromJson($stateParams.carro);
+
+  $scope.finalizarPedido = function () {
+    $ionicPopup.alert({
+      title: 'Parabéns',
+      template: 'Você acaba de comprar um carro.'
+    }).then(function () {
+      $state.go('listagem');
+    });
+  };
 });
