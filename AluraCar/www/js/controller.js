@@ -50,7 +50,7 @@ angular.module('starter').controller('ListagemController', function($scope, Carr
       });
     })
   };
-}).controller('LoginController', function ($scope, CarroService, $ionicPopup, $state) {
+}).controller('LoginController', function ($scope, CarroService, $ionicPopup, $state, $rootScope) {
   $scope.login = {};
 
   $scope.realizarLogin = function () {
@@ -62,7 +62,9 @@ angular.module('starter').controller('ListagemController', function($scope, Carr
     };
 
     CarroService.realizarLogin(dadosDoLogin).then(function (dados) {
-      $state.go('listagem');
+      $rootScope.usuario = dados.usuario;
+
+      $state.go('app.listagem');
     }, function (erro) {
       $ionicPopup.alert({
         title: 'Opa!',
@@ -70,4 +72,6 @@ angular.module('starter').controller('ListagemController', function($scope, Carr
       });
     });
   }
+}).controller('MenuController', function ($rootScope, $scope) {
+  $scope.usuarioLogado = $rootScope.usuario;
 });
