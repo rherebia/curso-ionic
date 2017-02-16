@@ -6,6 +6,14 @@ angular.module('starter').config(function ($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/menu.html',
     abstract: true,
     controller: 'MenuController'
+  }).state('app.perfil', {
+    url: '/perfil',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/perfil.html',
+        controller: 'PerfilController'
+      }
+    }
   }).state('app.listagem', {
     url: '/listagem',
     views: {

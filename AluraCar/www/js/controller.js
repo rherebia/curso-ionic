@@ -74,4 +74,19 @@ angular.module('starter').controller('ListagemController', function($scope, Carr
   }
 }).controller('MenuController', function ($rootScope, $scope) {
   $scope.usuarioLogado = $rootScope.usuario;
+}).controller('PerfilController', function ($rootScope, $scope) {
+  $scope.estaEditando = false;
+  $scope.textoBotao = 'Editar';
+
+  $scope.usuarioLogado = $rootScope.usuario;
+
+  $scope.acaoBotao = function () {
+    if ($scope.estaEditando) {
+      $scope.estaEditando = false;
+      $scope.textoBotao = 'Editar';
+    } else {
+      $scope.estaEditando = true;
+      $scope.textoBotao = 'Salvar';
+    }
+  }
 });
