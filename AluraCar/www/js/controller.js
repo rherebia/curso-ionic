@@ -51,7 +51,10 @@ angular.module('starter').controller('ListagemController', function($scope, Carr
     })
   };
 }).controller('LoginController', function ($scope, CarroService, $ionicPopup, $state, $rootScope) {
-  $scope.login = {};
+  $scope.login = {
+    email: 'joao@alura.com.br',
+    senha: 'alura123'
+  };
 
   $scope.realizarLogin = function () {
     var dadosDoLogin = {
@@ -74,7 +77,7 @@ angular.module('starter').controller('ListagemController', function($scope, Carr
   }
 }).controller('MenuController', function ($rootScope, $scope) {
   $scope.usuarioLogado = $rootScope.usuario;
-}).controller('PerfilController', function ($rootScope, $scope) {
+}).controller('PerfilController', function ($rootScope, $scope, $cordovaCamera) {
   $scope.estaEditando = false;
   $scope.textoBotao = 'Editar';
 
@@ -88,5 +91,19 @@ angular.module('starter').controller('ListagemController', function($scope, Carr
       $scope.estaEditando = true;
       $scope.textoBotao = 'Salvar';
     }
-  }
+  };
+
+  $scope.tirarFoto = function () {
+    var opcoes = {
+      quality: 70,
+      correctOrientation: true,
+      cameraDirection: 1
+    };
+
+    $cordovaCamera.getPicture(opcoes).then(function (foto) {
+      $scope.caminhoFoto = foto;
+    }, function (erro) {
+
+    })
+  };
 });
