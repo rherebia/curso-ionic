@@ -42,5 +42,13 @@ angular.module('starter').config(function ($stateProvider, $urlRouterProvider) {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'LoginController'
+  }).state('app.agendamentos', {
+    url: '/agendamentos',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/agendamentos.html',
+        controller: 'AgendamentosController'
+      }
+    }
   });
 });
