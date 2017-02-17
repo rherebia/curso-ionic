@@ -1,4 +1,5 @@
-angular.module('starter').controller('FinalizarPedidoController', function($stateParams, $scope, $ionicPopup, $state, CarroService, $ionicHistory, ionicDatePicker) {
+angular.module('starter').controller('FinalizarPedidoController', function($stateParams, $scope, $ionicPopup,
+        $state, CarroService, $ionicHistory, ionicDatePicker, DatabaseValues) {
   $scope.carroFinalizado = angular.fromJson($stateParams.carro);
 
   $scope.pedido = {};
@@ -17,6 +18,8 @@ angular.module('starter').controller('FinalizarPedidoController', function($stat
     };
 
     CarroService.salvarPedido(pedidoFinalizado).then(function (dados) {
+      $scope.salvarDadosNoBancoDeDados('true');
+
       $ionicHistory.nextViewOptions({
         disableBack: true
       });
@@ -28,12 +31,25 @@ angular.module('starter').controller('FinalizarPedidoController', function($stat
         $state.go('app.listagem');
       });
     }, function (erro) {
+      $scope.salvarDadosNoBancoDeDados('false');
+
       $ionicPopup.alert({
         title: 'Deu erro',
         template: 'Campos obrigatórios'
+      }).then(function () {
+        $state.go('app.listagem');
       });
     })
   };
+
+  $scope.salvarDadosNoBancoDeDados = function (confirmado) {
+    DatabaseValues.setup();
+    DatabaseValues.bancoDeDados.transaction(function (transacao) {
+      transacao.executeSql('INSERT INTO agendamentos (nome, endereco, email, dataAgendamento, modelo, preco, ' +
+        'confirmado) VALUES (?, ?, ?, ?, ?, ?, ?)', [$scope.pedido.nome, $scope.pedido.endereco, $scope.pedido.email,
+        $scope.dataSelecionada, $scope.carroFinalizado.nome, $scope.carroFinalizado.preco, confirmado])
+    });
+  }
 
   $scope.abrirPopupCalendario = function () {
     var configuracoes = {
