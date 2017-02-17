@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "angular-br-filters": "^0.7.0",
-    "ngCordova": "^0.1.27-alpha"
+    "ngCordova": "^0.1.27-alpha",
+    "ionic-datepicker": "^1.2.1"
   }
 }

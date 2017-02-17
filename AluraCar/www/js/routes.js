@@ -22,14 +22,22 @@ angular.module('starter').config(function ($stateProvider, $urlRouterProvider) {
         controller: 'ListagemController'
       }
     }
-  }).state('carroescolhido', {
+  }).state('app.carroescolhido', {
     url: '/carroescolhido/:carro',
-    templateUrl: 'templates/carroescolhido.html',
-    controller: 'CarroEscolhidoController'
-  }).state('finalizarPedido', {
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/carroescolhido.html',
+        controller: 'CarroEscolhidoController'
+      }
+    }
+  }).state('app.finalizarPedido', {
     url: '/finalizarpedido/:carro',
-    templateUrl: 'templates/finalizarpedido.html',
-    controller: 'FinalizarPedidoController'
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/finalizarpedido.html',
+        controller: 'FinalizarPedidoController'
+      }
+    }
   }).state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
